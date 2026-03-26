@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Specifications 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #cccccc;
+            background: #1a1a1a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #111, #333);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 {
+            color: #eee;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px #ff4444;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 20px;
+            border: 2px solid #555;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        nav a:hover, nav a.active {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: scale(1.05);
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.ctfassets.net/1fvlg6xqnm65/3mGzTCUmhzxU4XV6CUw7CO/cb3eaf4df02d9d6ccfa3da7d7bc2b2da/2026_Season_Launch_Desktop_Wallpaper_2.jpg?w=640&q=75&fm=webp') center/cover no-repeat fixed;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        main {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .specs-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .tab-btn {
+            background: #555;
+            color: #ccc;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid #555;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: translateY(-2px);
+        }
+        .spec-section {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #444;
+            backdrop-filter: blur(15px);
+            margin-bottom: 30px;
+        }
+        .spec-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .spec-section h3 {
+            color: #ddd;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .spec-card {
+            background: linear-gradient(135deg, rgba(68,68,68,0.3), rgba(100,100,100,0.3));
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #ff4444;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+        }
+        .spec-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255,68,68,0.2);
+            border-left-width: 6px;
+        }
+        .spec-icon {
+            font-size: 2.5em;
+            color: #ff4444;
+            display: block;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .spec-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff4444;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .spec-label {
+            text-align: center;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+        .comparison-table th {
+            background: #ff4444;
+            color: #fff;
+            font-weight: bold;
+        }
+        .comparison-table tr:hover {
+            background: rgba(255,68,68,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background: #555;
+            color: #ccc;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid #555;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 20px 10px;
+            text-align: center;
+        }
+        .btn:hover {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: translateY(-3px);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #111;
+            color: #888;
+            margin-top: 60px;
+        }
+        @media (max-width: 768px) {
+            .spec-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2em; }
+            header h1 { font-size: 2em; }
+            .comparison-table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>⚙️ F1 Specifications 2026</h1>
+        <nav class="specs-tabs">
+            
+            <button class="tab-btn active" onclick="showTab('chassis')">Chassis</button>
+            <button class="tab-btn" onclick="showTab('power')">Power Unit</button>
+            <button class="tab-btn" onclick="showTab('aero')">Aerodynamics</button>
+            <button class="tab-btn" onclick="showTab('tires')">Tires & Wheels</button>
+            <button class="tab-btn" onclick="showTab('2026')">2026 Changes</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Technical Blueprint</h2>
+            <p>Current regs vs revolutionary 2026 specs—every measurement matters.</p>
+        </div>
+    </section>
+
+    <main>
+        <section id="chassis" class="spec-section active">
+            <h3>🏎️ Chassis Dimensions</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span class="spec-icon">📏</span>
+                    <div class="spec-value">2000mm</div>
+                    <div class="spec-label">Wheelbase</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">📐</span>
+                    <div class="spec-value">2000mm</div>
+                    <div class="spec-label">Max Width</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">⚖️</span>
+                    <div class="spec-value">798kg</div>
+                    <div class="spec-label">Min Weight</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">🛡️</span>
+                    <div class="spec-value">17mm</div>
+                    <div class="spec-label">Halo Thickness</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="power" class="spec-section">
+            <h3>🔋 Power Unit Specs</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span class="spec-icon">⚡</span>
+                    <div class="spec-value">1000+ HP</div>
+                    <div class="spec-label">Total Output</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">🛢️</span>
+                    <div class="spec-value">110kg</div>
+                    <div class="spec-label">Fuel Capacity</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">🔥</span>
+                    <div class="spec-value">1.6L V6</div>
+                    <div class="spec-label">Turbo Engine</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">📈</span>
+                    <div class="spec-value">18,000 RPM</div>
+                    <div class="spec-label">Rev Limit</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="aero" class="spec-section">
+            <h3>✈️ Aerodynamic Limits</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span class="spec-icon">🕊️</span>
+                    <div class="spec-value">1000mm</div>
+                    <div class="spec-label">Rear Wing Height</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">📏</span>
+                    <div class="spec-value">950mm</div>
+                    <div class="spec-label">Front Wing Width</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">💨</span>
+                    <div class="spec-value">85cm²</div>
+                    <div class="spec-label">Rear Wing Endplate</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tires" class="spec-section">
+            <h3>🌑 Tires & Suspension</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Spec</th>
+                        <th>Current</th>
+                        <th>2026</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Wheel Size</td>
+                        <td>18"</td>
+                        <td>18"</td>
+                    </tr>
+                    <tr>
+                        <td>Front Width</td>
+                        <td>305mm</td>
+                        <td>Narrower</td>
+                    </tr>
+                    <tr>
+                        <td>Rear Width</td>
+                        <td>405mm</td>
+                        <td>25% Narrower</td>
+                    </tr>
+                    <tr>
+                        <td>Suspension</td>
+                        <td>In-Wheel</td>
+                        <td>Reintroduced</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="2026" class="spec-section">
+            <h3>🚀 2026 Regulation Changes</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span class="spec-icon">⚖️</span>
+                    <div class="spec-value">-30%</div>
+                    <div class="spec-label">Car Mass Reduction</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">🔋</span>
+                    <div class="spec-value">50/50</div>
+                    <div class="spec-label">ICE/Electric Split</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">🌿</span>
+                    <div class="spec-value">100%</div>
+                    <div class="spec-label">Sustainable Fuel</div>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-icon">✈️</span>
+                    <div class="spec-value">Active</div>
+                    <div class="spec-label">Aerodynamics</div>
+                </div>
+            </div>
+        </section>
+        <header>
+        <h1>🏁 For another pages</h1>
+            <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html">Gallery</a>
+            <!-- <a href="Specs.html" class="active">Specs</a> -->
+        </nav>
+    </header>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            const sections = document.querySelectorAll('.spec-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        document.querySelectorAll('nav a, .btn').forEach(link => {
+            if (link.href.includes('#')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

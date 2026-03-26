@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Gallery - Epic Moments</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #cccccc;
+            background: #1a1a1a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #111, #333);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 {
+            color: #eee;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px #ff4444;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 20px;
+            border: 2px solid #555;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: scale(1.05);
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1579952363873-27d3a4a0a8ca?w=1920') center/cover no-repeat fixed;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .gallery-filters {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .filter-btn {
+            background: #555;
+            color: #ccc;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin: 5px;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff4444;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,68,68,0.3);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #444;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            height: 300px;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255,68,68,0.3);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: #fff;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        .gallery-overlay h4 {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        .load-more {
+            display: block;
+            margin: 40px auto;
+            width: 200px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #111;
+            color: #888;
+            margin-top: 60px;
+        }
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .hero h2 { font-size: 2em; }
+            header h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📸 F1 Gallery Vault</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <!-- <a href="gallery.html" class="active">Gallery</a> -->
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Iconic F1 Moments Captured</h2>
+            <p>From historic engines to record-breaking machines—relive the speed.</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="gallery-grid" id="gallery">
+            <!-- Legends -->
+            <div class="gallery-item legends" data-category="legends">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Ferrari_125_F1_engine.jpg" alt="Ferrari Colombo V12 1950">
+                <div class="gallery-overlay">
+                    <h4>Ferrari 125 F1 (1950)</h4>
+                    <p>First F1 champ engine</p>
+                </div>
+            </div>
+            <div class="gallery-item legends" data-category="legends">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Alfetta_159_engine.jpg" alt="Alfa Romeo 159">
+                <div class="gallery-overlay">
+                    <h4>Alfa Romeo 159 (1951)</h4>
+                    <p>Supercharged straight-8</p>
+                </div>
+            </div>
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Circa_1980_Cosworth_DFV_at_Rahmi_M._Ko%C3%A7_M%C3%BCzesi.jpg" alt="Cosworth DFV">
+                <div class="gallery-overlay">
+                    <h4>Cosworth DFV V8 (1980)</h4>
+                    <p>Most successful F1 engine</p>
+                </div>
+            </div>
+            <div class="gallery-item engines" data-category="engines">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Renault_RS26_engine_2006.jpg" alt="Renault RS26">
+                <div class="gallery-overlay">
+                    <h4>Renault RS26 V8 (2006)</h4>
+                    <p>V8 era powerhouse</p>
+                </div>
+            </div>
+            <div class="gallery-item engines" data-category="engines">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/BRM_H16_engine.jpg" alt="BRM H16">
+                <div class="gallery-overlay">
+                    <h4>BRM H16 (1968)</h4>
+                    <p>Exotic 64-valve monster</p>
+                </div>
+            </div>
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.ytimg.com/vi/wJnFc6QgjzI/sddefault.jpg" alt="F1 Evolution">
+                <div class="gallery-overlay">
+                    <h4>F1 Evolution (1950-2023)</h4>
+                    <p>Ferrari timeline</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- <script>
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    item.style.opacity = '1';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+    </script> -->
+</body>
+</html>
