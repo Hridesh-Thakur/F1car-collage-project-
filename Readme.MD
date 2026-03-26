@@ -1,11 +1,5 @@
 # F1 Car Technologies & 2026 Revolution 🚀🏎️
 
-## 📋 Table of Contents
-- [Core Technologies](#core-technologies)
-- [2026 Regulation Changes](#2026-regulation-changes)  
-- [Current Teams](#current-teams)
-- [Car Specifications](#car-specifications)
-
 ## Core Technologies 🏁
 
 ### Power Units ⚡
