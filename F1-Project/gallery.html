@@ -70,29 +70,6 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
-        .gallery-filters {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .filter-btn {
-            background: #555;
-            color: #ccc;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-            margin: 5px;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: #ff4444;
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255,68,68,0.3);
-        }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -140,19 +117,6 @@
             font-size: 1.3em;
             margin-bottom: 5px;
         }
-        .load-more {
-            display: block;
-            margin: 40px auto;
-            width: 200px;
-            text-align: center;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #111;
-            color: #888;
-            margin-top: 60px;
-        }
         @media (max-width: 768px) {
             .gallery-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -191,6 +155,7 @@
                     <p>First F1 champ engine</p>
                 </div>
             </div>
+
             <div class="gallery-item legends" data-category="legends">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Alfetta_159_engine.jpg" alt="Alfa Romeo 159">
                 <div class="gallery-overlay">
@@ -198,6 +163,7 @@
                     <p>Supercharged straight-8</p>
                 </div>
             </div>
+
             <div class="gallery-item modern" data-category="modern">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Circa_1980_Cosworth_DFV_at_Rahmi_M._Ko%C3%A7_M%C3%BCzesi.jpg" alt="Cosworth DFV">
                 <div class="gallery-overlay">
@@ -205,6 +171,7 @@
                     <p>Most successful F1 engine</p>
                 </div>
             </div>
+
             <div class="gallery-item engines" data-category="engines">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Renault_RS26_engine_2006.jpg" alt="Renault RS26">
                 <div class="gallery-overlay">
@@ -212,6 +179,7 @@
                     <p>V8 era powerhouse</p>
                 </div>
             </div>
+
             <div class="gallery-item engines" data-category="engines">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/BRM_H16_engine.jpg" alt="BRM H16">
                 <div class="gallery-overlay">
@@ -219,6 +187,8 @@
                     <p>Exotic 64-valve monster</p>
                 </div>
             </div>
+
+            <!-- Modern Teams -->
             <div class="gallery-item modern" data-category="modern">
                 <img src="https://i.ytimg.com/vi/wJnFc6QgjzI/sddefault.jpg" alt="F1 Evolution">
                 <div class="gallery-overlay">
@@ -226,9 +196,79 @@
                     <p>Ferrari timeline</p>
                 </div>
             </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://images.ctfassets.net/1fvlg6xqnm65/5587h5UYNlFOPEXG6sC8Vr/22a89caa298e091e53fc3aa09e1709ff/W17_On_Track_Desktop_Wallpaper_3.jpg?w=640&q=75&fm=webp" alt="Mercedes F1">
+                <div class="gallery-overlay">
+                    <h4>Mercedes F1 (1950-2023)</h4>
+                    <p>AMG Petronas F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://www.wsupercars.com/thumbnails-super-ultrawide/Formula-1/Racing-Bulls/2025-Formula1-Racing-Bulls-RB02-002.jpg" alt="Racing Bulls">
+                <div class="gallery-overlay">
+                    <h4>Racing Bulls (2025)</h4>
+                    <p>Red Bull Racing F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://images.ctfassets.net/gy95mqeyjg28/76j66cxxKpgvTFPdpyToPe/495b88456a99a02369f9202ce14864a1/2025-f1-wallpapers-2-2.jpg?w=640&q=75&fm=webp" alt="McLaren">
+                <div class="gallery-overlay">
+                    <h4>McLaren (1950-2023)</h4>
+                    <p>McLaren Racing F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://ferrari-cdn.thron.com/delivery/public/thumbnail/ferrari/5ff9382c-2c1f-47d4-a5c4-e2c5944489fa/bocxuw/std/488x325/5ff9382c-2c1f-47d4-a5c4-e2c5944489fa?scalemode=centered" alt="Ferrari SF26">
+                <div class="gallery-overlay">
+                    <h4>Ferrari SF26</h4>
+                    <p>Scuderia Ferrari</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.pinimg.com/1200x/81/0e/df/810edf6c75270785ad14efa71454f18e.jpg" alt="Aston Martin">
+                <div class="gallery-overlay">
+                    <h4>Aston Martin Aramco</h4>
+                    <p>Aston Martin F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.pinimg.com/1200x/99/f5/88/99f58871973cd3cbe9c759df4048baa5.jpg" alt="Alpine">
+                <div class="gallery-overlay">
+                    <h4>Renault / Alpine</h4>
+                    <p>Alpine F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.pinimg.com/736x/20/56/67/2056671546da8fa77dae5d2d2e1a9bcc.jpg" alt="Williams">
+                <div class="gallery-overlay">
+                    <h4>Williams Racing</h4>
+                    <p>Historic British F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.pinimg.com/736x/66/64/c9/6664c9508cb289c31f656a83d1f0bdb1.jpg" alt="Kick Sauber">
+                <div class="gallery-overlay">
+                    <h4>Kick Sauber</h4>
+                    <p>Sauber F1 Team</p>
+                </div>
+            </div>
+
+            <div class="gallery-item modern" data-category="modern">
+                <img src="https://i.pinimg.com/736x/77/09/e3/7709e3baa9e7284d8ac16e2e22818037.jpg" alt="Haas">
+                <div class="gallery-overlay">
+                    <h4>Haas VF-26</h4>
+                    <p>Haas F1 Team</p>
+                </div>
+            </div>
         </div>
     </main>
-
-
 </body>
 </html>
