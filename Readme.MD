@@ -1,9 +1,5 @@
 
-## 🎮 Live Demo
 
-[🚀 View F1 Car Page](https://your-vercel-or-github-pages-link.vercel.app)
-
-(Replace with your actual deployment link after hosting on Vercel/GitHub Pages)
 
 ## 🏁 How to Run Locally
 
@@ -12,13 +8,6 @@
 3. Navigate sections using the top menu.
 4. Enjoy the interactive gallery and specs! 🏎️💨
 
-## 📱 Responsive Screenshots
-
-[image:1]  
-The home page looks sharp on desktop with a full-width hero section.[cite:4]
-
-[image:2]  
-Mobile view stacks sections perfectly for on-the-go F1 fans.[cite:3]
 
 ## 🔮 Future Enhancements
 
