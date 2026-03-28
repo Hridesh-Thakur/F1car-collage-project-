@@ -1,58 +1,37 @@
-# F1 Car Technologies & 2026 Revolution 🚀🏎️
 
-## Core Technologies 🏁
+## 🎮 Live Demo
 
-### Power Units ⚡
-- 1.6L V6 turbo-hybrid (~1000HP total)
-- MGU-K (kinetic recovery), MGU-H (heat recovery)
-- 15,000 RPM redline
+[🚀 View F1 Car Page](https://your-vercel-or-github-pages-link.vercel.app)
 
-### Aerodynamics ✈️
-- Ground-effect floors, DRS wings
-- 3-5 tonnes downforce @ 250km/h
-- CFD-optimized multi-element wings
+(Replace with your actual deployment link after hosting on Vercel/GitHub Pages)
 
-### Chassis 🛠️
-- Carbon fiber monocoque (~70kg)
-- Double wishbone suspension
-- Carbon-carbon brakes
+## 🏁 How to Run Locally
 
-### Tires 🛞
-- Pirelli 18" slicks (C1-C5 compounds)
-- Aramid belts, silica treads
+1. Clone or download the repo.
+2. Open `index.html` in any modern browser.
+3. Navigate sections using the top menu.
+4. Enjoy the interactive gallery and specs! 🏎️💨
 
-### Electronics 📊
-- 300+ sensors, 1M+ data points/second
-- Real-time telemetry & AI analytics
+## 📱 Responsive Screenshots
 
-## 2026 Regulation Changes 🔄
+[image:1]  
+The home page looks sharp on desktop with a full-width hero section.[cite:4]
 
-| Feature | Current | 2026 |
-|---------|---------|------|
-| **Weight** | 798kg | 768kg |
-| **Wheelbase** | 3600mm | 3400mm |
-| **Width** | 2000mm | 1900mm |
-| **Power Split** | 80/20 | 50/50 |
-| **Aero** | DRS | Active X/Z modes |
-| **MGU-H** | Yes | Removed |
+[image:2]  
+Mobile view stacks sections perfectly for on-the-go F1 fans.[cite:3]
 
-**Key Changes:**
-- 100% sustainable fuels
-- Triple MGU-K power (350kW)
-- Manual Override overtaking boost
-- Smaller, nimbler cars
+## 🔮 Future Enhancements
 
-## Current Teams (2026) 🏆
-Ferrari • Mercedes • Red Bull • McLaren • Aston Martin • Alpine • Williams • Haas • Racing Bulls • Audi • Cadillac
+- Video backgrounds for engine sounds.
+- 3D car model viewer.
+- Team comparison charts.
+- Dark mode toggle.
 
-## Car Specifications 📊
+## ⭐ Support the Project
 
-| Metric | Value |
-|--------|-------|
-| **Top Speed** | 370+ km/h |
-| **Weight** | 798kg |
-| **Power** | 1000+ HP |
-| **0-100 km/h** | 2.1s |
-| **Braking** | 300-0km/h in 100m |
+⭐ **Star this repo** if you like it!  
+👨‍💻 **Fork & contribute** new features.  
+💬 **Issues/PRs welcome** for improvements.
 
 
+**Made by @Hridesh-Thakur** 🏁⚡
