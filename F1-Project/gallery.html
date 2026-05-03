@@ -6,30 +6,54 @@
     <title>F1 Gallery - Epic Moments</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root{
+            --bg: #0d0d0f;
+            --bg-2: #17171b;
+            --panel: rgba(255,255,255,0.05);
+            --panel-2: rgba(255,255,255,0.03);
+            --text: #d6d6d6;
+            --muted: #9a9a9a;
+            --accent: #ff4444;
+            --accent-soft: rgba(255,68,68,0.18);
+            --border: rgba(255,255,255,0.10);
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #cccccc;
-            background: #1a1a1a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255,68,68,0.08), transparent 18%),
+                radial-gradient(circle at 85% 80%, rgba(255,255,255,0.04), transparent 20%),
+                #1a1a1a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
             line-height: 1.7;
             overflow-x: hidden;
+            perspective: 1200px;
         }
+
         header {
-            background: linear-gradient(90deg, #111, #333);
+            background: linear-gradient(90deg, rgba(17,17,17,0.88), rgba(51,51,51,0.72));
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             position: sticky;
             top: 0;
             z-index: 100;
-        }    
-        header h1 { 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header h1 {
             color: #eee;
             font-size: 2.5em;
             text-shadow: 0 0 20px #ff4444;
+            letter-spacing: 0.03em;
         }
-        nav { 
+
+        nav {
             margin-top: 10px;
-        } 
+        }
+
         nav a {
             color: #ccc;
             text-decoration: none;
@@ -39,15 +63,40 @@
             border: 2px solid #555;
             transition: all 0.3s;
             font-weight: bold;
-        } 
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            background: rgba(255,255,255,0.02);
+        }
+
+        nav a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.30), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.5s ease;
+        }
+
+        nav a:hover::before {
+            left: 140%;
+        }
+
         nav a:hover {
             background: #ff4444;
             color: #fff;
             border-color: #ff4444;
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 18px rgba(255,68,68,0.32);
         }
+
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1579952363873-27d3a4a0a8ca?w=1920') center/cover no-repeat fixed;
+            background:
+                linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)),
+                url('https://images.unsplash.com/photo-1579952363873-27d3a4a0a8ca?w=1920') center/cover no-repeat fixed;
             height: 60vh;
             display: flex;
             align-items: center;
@@ -55,75 +104,184 @@
             text-align: center;
             color: #fff;
             position: relative;
+            overflow: hidden;
         }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.16;
+            pointer-events: none;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+
+        .hero::before {
+            background: #ff4444;
+            top: -80px;
+            left: -80px;
+        }
+
+        .hero::after {
+            background: #ffffff;
+            bottom: -120px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); }
+            50% { transform: translate3d(15px,-20px,40px) scale(1.05); }
+        }
+
         .hero-content {
             z-index: 2;
             max-width: 800px;
-            padding: 0 20px;
+            padding: 26px 24px;
+            transform-style: preserve-3d;
+            animation: heroFloat 5.5s ease-in-out infinite;
         }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-8px) rotateX(2deg); }
+        }
+
         .hero h2 {
             font-size: 3em;
             margin-bottom: 20px;
+            transform: translateZ(40px);
+            text-shadow: 0 0 24px rgba(255,68,68,0.28);
         }
+
+        .hero p {
+            transform: translateZ(22px);
+            color: #e5e5e5;
+        }
+
         main {
             max-width: 1400px;
             margin: 0 auto;
             padding: 40px 20px;
         }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
+
         .gallery-item {
             position: relative;
-            border-radius: 15px;
+            border-radius: 18px;
             overflow: hidden;
             background: rgba(255,255,255,0.05);
-            border: 1px solid #444;
-            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.10);
+            transition: transform 0.2s ease, box-shadow 0.35s ease, border-color 0.35s ease;
             cursor: pointer;
             height: 300px;
+            transform-style: preserve-3d;
+            will-change: transform;
+            box-shadow:
+                0 12px 28px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
         }
-        .gallery-item:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255,68,68,0.3);
+
+        .gallery-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.16) 50%, transparent 80%);
+            transform: translateX(-140%) skewX(-18deg);
+            transition: transform 0.7s ease;
+            z-index: 3;
+            pointer-events: none;
         }
+
+        .gallery-item::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top left, rgba(255,68,68,0.16), transparent 28%),
+                linear-gradient(to top, rgba(0,0,0,0.50), transparent 35%);
+            opacity: 0.6;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            transform: translateX(160%) skewX(-18deg);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0.9;
+        }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s;
+            transition: transform 0.45s ease, filter 0.45s ease;
+            transform: translateZ(10px) scale(1.01);
+            display: block;
         }
+
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: translateZ(30px) scale(1.08);
+            filter: saturate(1.08) contrast(1.04);
         }
+
         .gallery-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
             color: #fff;
             padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
+            transform: translateY(100%) translateZ(40px);
+            transition: transform 0.35s ease;
+            z-index: 4;
+            backdrop-filter: blur(2px);
         }
+
         .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
+            transform: translateY(0) translateZ(40px);
         }
+
         .gallery-overlay h4 {
             font-size: 1.3em;
             margin-bottom: 5px;
+            text-shadow: 0 0 12px rgba(255,68,68,0.20);
         }
+
+        .gallery-overlay p {
+            color: #ddd;
+        }
+
         @media (max-width: 768px) {
             .gallery-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                 gap: 20px;
             }
+
             .hero h2 { font-size: 2em; }
             header h1 { font-size: 2em; }
+
+            nav a {
+                margin: 6px 5px;
+                padding: 8px 14px;
+            }
         }
     </style>
 </head>
@@ -143,9 +301,9 @@
             <h2>Iconic F1 Moments Captured</h2>
             <p>From historic engines to record-breaking machines—relive the speed.</p>
         </div>
-    </section> 
+    </section>
 
-    <main> 
+    <main>
         <div class="gallery-grid" id="gallery">
             <!-- Legends -->
             <div class="gallery-item legends" data-category="legends">
@@ -154,7 +312,7 @@
                     <h4>Ferrari 125 F1 (1950)</h4>
                     <p>First F1 champ engine</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery-item legends" data-category="legends">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Alfetta_159_engine.jpg" alt="Alfa Romeo 159">
@@ -162,7 +320,7 @@
                     <h4>Alfa Romeo 159 (1951)</h4>
                     <p>Supercharged straight-8</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery-item modern" data-category="modern">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Circa_1980_Cosworth_DFV_at_Rahmi_M._Ko%C3%A7_M%C3%BCzesi.jpg" alt="Cosworth DFV">
@@ -178,7 +336,7 @@
                     <h4>Renault RS26 V8 (2006)</h4>
                     <p>V8 era powerhouse</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery-item engines" data-category="engines">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/BRM_H16_engine.jpg" alt="BRM H16">
@@ -243,7 +401,7 @@
                     <h4>Renault / Alpine</h4>
                     <p>Alpine F1 Team</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery-item modern" data-category="modern">
                 <img src="https://i.pinimg.com/736x/20/56/67/2056671546da8fa77dae5d2d2e1a9bcc.jpg" alt="Williams">
@@ -259,7 +417,7 @@
                     <h4>Kick Sauber</h4>
                     <p>Sauber F1 Team</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery-item modern" data-category="modern">
                 <img src="https://i.pinimg.com/736x/77/09/e3/7709e3baa9e7284d8ac16e2e22818037.jpg" alt="Haas">
@@ -270,5 +428,31 @@
             </div>
         </div>
     </main>
+
+    <script>
+        const cards = document.querySelectorAll('.gallery-item');
+
+        cards.forEach((card) => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.03)`;
+                card.style.boxShadow = `0 24px 40px rgba(255,68,68,0.18), 0 12px 20px rgba(0,0,0,0.35)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)`;
+                card.style.boxShadow = `0 12px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05)`;
+            });
+        });
+    </script>
 </body>
-</html>  
+</html>
