@@ -152,12 +152,271 @@
             .hero h2 { font-size: 2em; }
             header h1 { font-size: 2em; }
         } 
+    
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #cccccc;
+            background:
+                radial-gradient(circle at top, rgba(255,68,68,0.12), transparent 30%),
+                linear-gradient(135deg, #111 0%, #1a1a1a 45%, #0d0d0d 100%);
+            background-attachment: fixed;
+            line-height: 1.7;
+            overflow-x: hidden;
+            perspective: 1200px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.25;
+            animation: drift 18s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes drift {
+            from { transform: translate3d(0,0,0); }
+            to { transform: translate3d(-40px,-40px,0); }
+        }
+
+        header {
+            background: linear-gradient(90deg, rgba(17,17,17,0.9), rgba(51,51,51,0.9));
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            animation: headerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes headerFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-2px) rotateX(2deg); }
+        }
+
+        header h1 {
+            color: #eee;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px #ff4444, 0 0 40px rgba(255,68,68,0.3);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255,68,68,0.4)); }
+            50% { filter: drop-shadow(0 0 18px rgba(255,68,68,0.9)); }
+        }
+
+        nav { margin-top: 10px; }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 20px;
+            border: 2px solid #555;
+            transition: all 0.35s ease;
+            font-weight: bold;
+            display: inline-block;
+            transform-style: preserve-3d;
+        }
+
+        nav a:hover {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: translateY(-4px) rotateX(12deg) rotateY(-10deg) scale(1.08);
+            box-shadow: 0 15px 35px rgba(255,68,68,0.35);
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1563811089515-7dce9e98a474?w=1920') center/cover no-repeat fixed;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,68,68,0.18), rgba(0,0,0,0.75));
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+            transform: translateX(-40%);
+            animation: sweep 7s linear infinite;
+        }
+
+        @keyframes sweep {
+            0% { transform: translateX(-60%) rotate(0deg); }
+            100% { transform: translateX(60%) rotate(0deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateZ(60px);
+            animation: heroHover 5s ease-in-out infinite;
+        }
+
+        @keyframes heroHover {
+            0%, 100% { transform: translateZ(60px) translateY(0); }
+            50% { transform: translateZ(90px) translateY(-8px); }
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 25px rgba(255,255,255,0.3);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+            transform-style: preserve-3d;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.8s ease;
+        }
+
+        .section:hover::after {
+            left: 150%;
+        }
+
+        .section:hover {
+            transform: translateY(-8px) rotateX(4deg);
+            box-shadow: 0 25px 55px rgba(0,0,0,0.5);
+        }
+
+        .section h3 {
+            color: #ddd;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: '🏎️';
+            margin-right: 10px;
+            font-size: 1.5em;
+            filter: drop-shadow(0 0 8px rgba(255,68,68,0.6));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #444, #666);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform-style: preserve-3d;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) rotateY(10deg) rotateX(8deg) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            color: #ff4444;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(255,68,68,0.45);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #555, #333);
+            color: #ccc;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .btn:hover {
+            background: #ff4444;
+            color: #fff;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255,68,68,0.35);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #888;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2em; }
+            header h1 { font-size: 2em; }
+            nav a { margin: 6px 4px; padding: 8px 14px; }
+        }
     </style>
-</head> 
+</head>
 <body>
     <header>
         <h1>🏁 F1 Cars Unleashed</h1>
-            <nav>
+        <nav>
             <a href="index.html">Home</a>
             <a href="about.html" style="background:#ff4444; color:#fff; border-color:#ff4444;">About</a>
             <a href="gallery.html">Gallery</a>
@@ -165,7 +424,7 @@
             <a href="tracks.html">Tracks</a>
             <a href="Specs.html">Specs</a>
         </nav>
-    </header> 
+    </header>
 
     <section class="hero">
         <div class="hero-content">
@@ -173,7 +432,7 @@
             <p>Experience speeds over 370 km/h, 5G downforce, and hybrid power like never before.</p>
         </div>
     </section>
- 
+
     <main>
         <section id="history" class="section">
             <h3>70+ Years of Evolution</h3>
@@ -182,7 +441,7 @@
                 <div class="stat-card">
                     <div class="stat-value">1950</div>
                     <div>First Championship</div>
-                </div> 
+                </div>
                 <div class="stat-card">
                     <div class="stat-value">1,000+</div>
                     <div>Horsepower</div>
@@ -211,7 +470,7 @@
                     🛡️ <strong>Halo & Safety:</strong> Titanium bar survives 50G impacts
                 </li>
                 <li style="padding: 15px; background: rgba(255,68,68,0.1); margin: 10px 0; border-radius: 8px; border-left: 4px solid #ff4444;">
-                    🛠️ <strong>Chassis and Material :</strong>Carbon fiber monocoques form lightweight, crash-resistant structures, often reinforced with Kevlar or Zylon for safety. Teams use finite element analysis (FEA) for structural integrity, balancing low weight with high strength
+                    🛠️ <strong>Chassis and Material :</strong> Carbon fiber monocoques form lightweight, crash-resistant structures, often reinforced with Kevlar or Zylon for safety. Teams use finite element analysis (FEA) for structural integrity, balancing low weight with high strength
                 </li>
                 <li style="padding: 15px; background: rgba(255,68,68,0.1); margin: 10px 0; border-radius: 8px; border-left: 4px solid #ff4444;">
                     📡 <strong>Electronics and Data :</strong> Advanced telemetry and data analysis for performance optimization
@@ -228,12 +487,14 @@
         <section id="2026" class="section">
             <h3>2026 Revolution</h3>
             <p>FIA's new rules: Smaller, lighter cars (30% less mass), 50/50 ICE-electric power, sustainable fuels, active aero for closer racing.[web:57] Expect nimble machines hitting 400 km/h straights!</p>
-            <p><strong>2026 F1 Revolution 🏎️⚡🔄 </strong></br>The 2026 regs bring massive changes for lighter, greener, closer racing—cars shrink 30kg to ~768kg with shorter wheelbases (3.4m vs 3.6m) and narrower bodies (1.9m) </br> 
-            </p>
+            <p><strong>2026 F1 Revolution 🏎️⚡🔄 </strong><br>The 2026 regs bring massive changes for lighter, greener, closer racing—cars shrink 30kg to ~768kg with shorter wheelbases (3.4m vs 3.6m) and narrower bodies (1.9m)</p>
             <div style="text-align: center;">
                 <a href="https://www.formula1.com" class="btn" target="_blank">2026 Details</a>
             </div>
         </section>
-    </main> 
+    </main>
+</body>
+</html>
+
 </body>
 </html>
