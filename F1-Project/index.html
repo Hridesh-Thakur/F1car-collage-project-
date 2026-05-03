@@ -6,8 +6,36 @@
   <title>F1 Future Racing</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+    :root {
+      --red: #ff1e00;
+      --red-soft: rgba(255, 30, 0, 0.18);
+      --glass: rgba(255, 0, 0, 0.05);
+      --glass-border: rgba(255, 0, 0, 0.15);
+      --text-soft: #b8b8b8;
+      --panel: rgba(255,255,255,0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: radial-gradient(circle at 20% 20%, #0a0a0a, #000000);
+      margin: 0;
+      color: white;
+      overflow-x: hidden;
+      font-family: 'Rajdhani', sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, #131313 0%, #050505 35%, #000000 100%);
+      perspective: 1200px;
+    }
+
+    h1, h2, h3, .brand-font {
       font-family: 'Orbitron', sans-serif;
     }
 
@@ -18,7 +46,11 @@
     .glass {
       background: rgba(255, 0, 0, 0.05);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 0, 0, 0.1);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 10px 30px rgba(0,0,0,0.25);
     }
 
     .neon-border {
@@ -38,11 +70,179 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, rgb(241, 0, 0), transparent);
       animation: speed 3s linear infinite;
+      opacity: 0.65;
     }
 
     @keyframes speed {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
+    }
+
+    .hero-3d {
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .hero-title {
+      transform: translateZ(80px);
+      letter-spacing: 0.08em;
+    }
+
+    .hero-sub {
+      transform: translateZ(45px);
+    }
+
+    .hero-car {
+      transform: translateZ(20px);
+      filter: drop-shadow(0 30px 35px rgba(255, 0, 0, 0.18));
+      animation: floatCar 5s ease-in-out infinite;
+    }
+
+    @keyframes floatCar {
+      0%, 100% {
+        transform: translateZ(20px) translateY(0px);
+      }
+      50% {
+        transform: translateZ(40px) translateY(-10px);
+      }
+    }
+
+    .section-wrap {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .section-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,0,0,0.08), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(255,255,255,0.03), transparent 20%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .tilt-card {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 350ms ease, box-shadow 350ms ease, border-color 350ms ease;
+      will-change: transform;
+      border-radius: 1rem;
+    }
+
+    .tilt-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10), transparent 40%, rgba(255,0,0,0.08));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .tilt-card:hover::before {
+      opacity: 1;
+    }
+
+    .tilt-inner {
+      transform: translateZ(30px);
+    }
+
+    .card-title {
+      transform: translateZ(42px);
+    }
+
+    .card-value {
+      transform: translateZ(55px);
+    }
+
+    .card-text {
+      transform: translateZ(22px);
+    }
+
+    .stats-card:hover,
+    .tilt-card:hover {
+      box-shadow:
+        0 18px 35px rgba(0,0,0,0.38),
+        0 0 25px rgba(255, 30, 0, 0.14);
+      border-color: rgba(255, 0, 0, 0.35);
+    }
+
+    .gallery-img {
+      transition: transform 350ms ease, box-shadow 350ms ease, filter 350ms ease;
+      transform-style: preserve-3d;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+
+    .gallery-img:hover {
+      transform: perspective(1000px) rotateX(6deg) rotateY(-8deg) translateY(-8px) scale(1.02);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.4),
+        0 0 22px rgba(255,0,0,0.18);
+      filter: saturate(1.1);
+    }
+
+    .timeline-text {
+      line-height: 1.9;
+    }
+
+    .soft-text {
+      color: #bfbfbf;
+    }
+
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .section-heading::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 70%;
+      height: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      box-shadow: 0 0 18px rgba(255,0,0,0.45);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(255,0,0,0.5);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        transform: translateZ(40px);
+      }
+
+      .hero-sub {
+        transform: translateZ(20px);
+      }
+
+      .hero-car {
+        width: 95% !important;
+      }
     }
   </style>
 </head>
@@ -50,53 +250,42 @@
 <body class="text-white">
 
 <!-- NAVBAR -->
-<nav class="flex justify-between items-center px-10 py-6 fixed w-full z-50 bg-black/30 backdrop-blur-md">
-  <h1 class="text-xl glow font-bold">F1 X</h1>
+<nav class="flex justify-between items-center px-10 py-6 fixed w-full z-50 bg-black/30 backdrop-blur-md border-b border-red-900/20">
+  <h1 class="text-xl glow font-bold brand-font">F1 X</h1>
   <ul class="flex gap-8 text-sm uppercase tracking-widest">
     <li><a href="index.html" class="hover:text-red-400">Home</a></li>
     <li><a href="about.html" class="hover:text-red-400">About</a></li>
     <li><a href="Specs.html" class="hover:text-red-400">Specs</a></li>
     <li><a href="gallery.html" class="hover:text-red-400">Gallery</a></li>
+    <li><a href="tracks.html" class="hover:text-red-400">Tracks</a></li>
     <li><a href="Contact.html" class="hover:text-red-400">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="h-screen flex flex-col justify-center items-center text-center relative overflow-hidden">
+<section class="h-screen flex flex-col justify-center items-center text-center relative overflow-hidden hero-3d">
   <div class="speed-line top-1/3"></div>
   <div class="speed-line top-2/3"></div>
-  <h1 style="font-family: arquitecta;" class="text-5xl md:text-7xl font-bold glow mb-6">
-    <!-- Speed  -->
-  </h1>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  <!-- <p class="text-white-400 max-w-xl mb-8" style="font: italic;">
+
+  <!-- <h1 class="hero-title text-5xl md:text-7xl font-bold glow mb-6">
+    Speed
+  </h1> -->
+
+  <!-- <p class="hero-sub text-gray-400 max-w-xl mb-8 italic px-4">
     Engineering the future of Formula 1 with cutting-edge aerodynamics and next-gen racing technology.
   </p> -->
 
-  <!-- <button class="px-8 py-3 neon-border rounded-full hover-glow">
-    Explore Machine
-  </button> -->
-
-  <!-- F1 CAR IMAGE -->
-  <img src="https://plain-apac-prod-public.komododecks.com/202604/27/rYtNqufypa5YhystVksB/image.jpg"
-       class="absolute bottom-0 w-[80%] opacity-70 mix-blend-lighten" 
-       style="background-size: cover;" />
+  <img
+    src="https://plain-apac-prod-public.komododecks.com/202604/27/rYtNqufypa5YhystVksB/image.jpg"
+    class="hero-car absolute bottom-0 w-[80%] opacity-70 mix-blend-lighten"
+    style="background-size: cover;"
+    alt="F1 futuristic car"
+  />
 </section>
 
 <!-- ABOUT -->
-<section class="py-20 px-10 text-center">
-  <h2 class="text-3xl glow mb-6">About the Team</h2>
+<section class="py-20 px-10 text-center section-wrap">
+  <h2 class="text-3xl glow mb-6 section-heading">About the Team</h2>
   <p class="max-w-2xl mx-auto text-gray-400">
     A futuristic motorsport division focused on speed, precision, and innovation.
     Every component is engineered for peak performance and dominance on the track.
@@ -104,181 +293,254 @@
 </section>
 
 <!-- Recently win by -->
-<section class="py-20 px-10 text-center">
-  <h2 class="text-3xl glow mb-6">All trophies taken after 2010</h2>
-  <!-- <p class="max-w-2xl mx-auto text-gray-400">
-    As of March 2026, Kimi Antonelli (Mercedes) won the most recent race
-  </p> -->
-  <p class="max-w-2xl mx-auto text-gray-400">
-    2010 -	Sebastian Vettel (GER)</br>
-    2011 -	Sebastian Vettel (GER)</br>
-    2012 -	Sebastian Vettel (GER)</br>
-    2013 -	Sebastian Vettel (GER)</br>
-    2014 -	Lewis Hamilton (GBR)</br>
-    2015 -	Lewis Hamilton (GBR)</br>
-    2016 -	Nico Rosberg (GER)</br>
-    2017 -	Lewis Hamilton (GBR)</br>
-    2018 -	Lewis Hamilton (GBR)</br>
-    2019 -	Lewis Hamilton (GBR)</br>
-    2020 -	Lewis Hamilton (GBR)</br>
-    2021 -	Lewis Hamilton (GBR)</br>
-    2022 -	Lewis Hamilton (GBR)</br>
-    2023 -	Lewis Hamilton (GBR)</br>
-    2024 -	Lewis Hamilton (GBR)</br>
-    2025 -	Lewis Hamilton (GBR)</br>
-    2026 -	Kimi Antonelli (Mercedes)</br>
-
+<section class="py-20 px-10 text-center section-wrap">
+  <h2 class="text-3xl glow mb-6 section-heading">All trophies taken after 2010</h2>
+  <p class="max-w-2xl mx-auto text-gray-400 timeline-text">
+    2010 - Sebastian Vettel (GER)<br>
+    2011 - Sebastian Vettel (GER)<br>
+    2012 - Sebastian Vettel (GER)<br>
+    2013 - Sebastian Vettel (GER)<br>
+    2014 - Lewis Hamilton (GBR)<br>
+    2015 - Lewis Hamilton (GBR)<br>
+    2016 - Nico Rosberg (GER)<br>
+    2017 - Lewis Hamilton (GBR)<br>
+    2018 - Lewis Hamilton (GBR)<br>
+    2019 - Lewis Hamilton (GBR)<br>
+    2020 - Lewis Hamilton (GBR)<br>
+    2021 - Lewis Hamilton (GBR)<br>
+    2022 - Lewis Hamilton (GBR)<br>
+    2023 - Lewis Hamilton (GBR)<br>
+    2024 - Lewis Hamilton (GBR)<br>
+    2025 - Lewis Hamilton (GBR)<br>
+    2026 - Kimi Antonelli (Mercedes)
   </p>
 </section>
 
-<section class="py-20 px-10 text-center">
-  <h2 class="text-3xl glow mb-6">Most Successful Drivers</h2>
+<section class="py-20 px-10 text-center section-wrap">
+  <h2 class="text-3xl glow mb-6 section-heading">Most Successful Drivers</h2>
   <p class="max-w-2xl mx-auto text-gray-400">
-   Michael Schumacher and Lewis Hamilton share the record with 7 titles each, </br> followed by Juan Manuel Fangio with 5. Max Verstappen holds 4 consecutive titles from </br>2021–2024.
+    Michael Schumacher and Lewis Hamilton share the record with 7 titles each,
+    <br> followed by Juan Manuel Fangio with 5. Max Verstappen holds 4 consecutive titles from
+    <br>2021–2024.
   </p>
 </section>
+
 <!-- CAR SPECS -->
-<section class="py-20 px-10">
-  <h2 class="text-3xl glow text-center mb-12">Car Specifications</h2>
+<section class="py-20 text-center px-10 section-wrap">
+  <h2 class="text-3xl glow text-center mb-12 section-heading">Car Specifications</h2>
 
   <div class="grid md:grid-cols-3 gap-8">
-    <div class="glass p-6 rounded-xl hover-glow">
-      <h3 class="text-xl mb-2" style="text-align: center;">Top Speed</h3>
-      <p class="text-red-400 text-2xl" style="text-align: center;">380 km/h</p>
-      <p class="text-red-400 text-2xl" style="text-align: center;">Formula 1 cars typically reach top speeds of around 360–370 km/h (223–230 mph) during races, with the highest official race speed record being 372.6 km/h (231.52 mph)</p>
-    </div>
-    
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Engine</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Hybrid V6 Turbo</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Modern Formula 1 cars use highly advanced 1.6-liter V6 hybrid turbocharged engines, producing over 1,000 hp (combined) at up to 15,000 RPM. These power units, mandated since 2014, utilize MGU-K and MGU-H energy recovery systems.</p>
-    </div>
-    
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Acceleration</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">0-100 in 2.4s</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Modern Formula 1 cars are among the fastest accelerating vehicles on earth, reaching 0–60 mph (km/h) in roughly 1.7 to 2.6 seconds. They achieve 0–100 mph (km/h) in around 4 seconds or less. Acceleration is limited by traction rather than power, using hybrid engines with over 1,000 HP and immense aerodynamic downforce to achieve these speeds.</p>
-    </div>
-    
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Power Unit (Hybrid Engine)</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">350 kW (~470 hp)</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Total output is close to 1000 brake horsepower (bhp). MGU-H (heat recovery from turbo) has been removed for simplicity. Uses 100% sustainable drop-in fuel (E100 or advanced biofuels) — much greener. Battery energy recovery is more powerful, especially under braking, for stronger acceleration and overtaking.</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Top Speed</h3>
+        <p class="text-red-400 text-2xl text-center card-value">380 km/h</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Formula 1 cars typically reach top speeds of around 360–370 km/h (223–230 mph) during races, with the highest official race speed record being 372.6 km/h (231.52 mph)
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Active Aerodynamics</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Old DRS system</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Drivers can switch between two modes: Low-drag mode (straights) — wings flatten for higher top speed. High-downforce mode (corners) — wings adjust for maximum grip.</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Engine</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Hybrid V6 Turbo</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Modern Formula 1 cars use highly advanced 1.6-liter V6 hybrid turbocharged engines, producing over 1,000 hp (combined) at up to 15,000 RPM. These power units, mandated since 2014, utilize MGU-K and MGU-H energy recovery systems.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">About Cars</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Can reach 360+ km/h</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Can reach 360+ km/h while acclerating the car and can maintain high speeds on straight sections.</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Acceleration</h3>
+        <p class="text-red-400 text-2xl text-center card-value">0-100 in 2.4s</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Modern Formula 1 cars are among the fastest accelerating vehicles on earth, reaching 0–60 mph (km/h) in roughly 1.7 to 2.6 seconds. They achieve 0–100 mph (km/h) in around 4 seconds or less. Acceleration is limited by traction rather than power, using hybrid engines with over 1,000 HP and immense aerodynamic downforce to achieve these speeds.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Key Pros</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Fast-paced</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Builds a passionate global community and showcases cutting-edge engineering and driver skill</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Live attendance provides unmatched atmosphere, sound, and speed that TV can't fully replicate. </p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Power Unit (Hybrid Engine)</h3>
+        <p class="text-red-400 text-2xl text-center card-value">350 kW (~470 hp)</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Total output is close to 1000 brake horsepower (bhp). MGU-H (heat recovery from turbo) has been removed for simplicity. Uses 100% sustainable drop-in fuel (E100 or advanced biofuels) — much greener. Battery energy recovery is more powerful, especially under braking, for stronger acceleration and overtaking.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Performance Numbers</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Can reach 360+ km/h</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;"><b>Acceleration:</b> Extremely quick thanks to massive electric torque — 0-100 km/h in under 2 seconds, and very strong mid-corner acceleration.</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;"><b>Better energy management:</b> Full electric boost available more often, but battery capacity is still limited (around 4 MJ usable).</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Active Aerodynamics</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Old DRS system</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Drivers can switch between two modes: Low-drag mode (straights) — wings flatten for higher top speed. High-downforce mode (corners) — wings adjust for maximum grip.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Car Companies</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Major Formula 1 car brands and teams for the 2026 season include iconic manufacturers like  <b>Ferrari, Mercedes, and Aston Martin,</b>   alongside established constructors such as McLaren, Williams, and Red Bull (partnering with Ford). New entries include Audi and Cadillac, with Alpine, Haas, and Racing Bulls rounding out the 11-team grid. </p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">About Cars</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Can reach 360+ km/h</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Can reach 360+ km/h while acclerating the car and can maintain high speeds on straight sections.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Performance Numbers</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">Can reach 360+ km/h</p>
-        <p class="text-red-400 text-2xl" style="text-align: center;"><b>Acceleration:</b> Extremely quick thanks to massive electric torque </br> 0-100 km/h in under 2 seconds, and very strong mid-corner acceleration.</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Key Pros</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Fast-paced</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Builds a passionate global community and showcases cutting-edge engineering and driver skill
+        </p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Live attendance provides unmatched atmosphere, sound, and speed that TV can't fully replicate.
+        </p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Chassis Materials 🛠️</h3>
-        <!-- <p class="text-red-400 text-2xl" style="text-align: center;">Can reach 360+ km/h</p> -->
-        <p class="text-red-400 text-2xl" style="text-align: center;">Monocoque: Carbon fiber/Kevlar sandwich </br>Weight: ~70kg (chassis only) </br>Suspension: Double wishbone, pushrod/pullrod </br>Brakes: Carbon-carbon discs</p>
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Performance Numbers</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Can reach 360+ km/h</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          <b>Acceleration:</b> Extremely quick thanks to massive electric torque — 0-100 km/h in under 2 seconds, and very strong mid-corner acceleration.
+        </p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          <b>Better energy management:</b> Full electric boost available more often, but battery capacity is still limited (around 4 MJ usable).
+        </p>
+      </div>
     </div>
-    
-    <div class="glass p-6 rounded-xl hover-glow">
-        <h3 class="text-xl mb-2" style="text-align: center;">Companies</h3>
-        <p class="text-red-400 text-2xl" style="text-align: center;">1. Ferrari </br>2. Mercedes </br>3. Red Bull </br>4. McLaren</br>5. Aston Martin </br>6. Alpine </br>7. Williams</br>8. Haas </br>9. Racing Bulls </br>10. Audi </br>11. Cadillac</p>
+
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Car Companies</h3>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Major Formula 1 car brands and teams for the 2026 season include iconic manufacturers like <b>Ferrari, Mercedes, and Aston Martin,</b> alongside established constructors such as McLaren, Williams, and Red Bull (partnering with Ford). New entries include Audi and Cadillac, with Alpine, Haas, and Racing Bulls rounding out the 11-team grid.
+        </p>
+      </div>
+    </div>
+
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Performance Numbers</h3>
+        <p class="text-red-400 text-2xl text-center card-value">Can reach 360+ km/h</p>
+        <p class="text-red-400 text-2xl text-center card-text">
+          <b>Acceleration:</b> Extremely quick thanks to massive electric torque <br> 0-100 km/h in under 2 seconds, and very strong mid-corner acceleration.
+        </p>
+      </div>
+    </div>
+
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Chassis Materials 🛠️</h3>
+        <p class="text-red-400 text-2xl text-center card-text">
+          Monocoque: Carbon fiber/Kevlar sandwich <br>Weight: ~70kg (chassis only) <br>Suspension: Double wishbone, pushrod/pullrod <br>Brakes: Carbon-carbon discs
+        </p>
+      </div>
+    </div>
+
+    <div class="glass p-6 rounded-xl tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl mb-2 text-center card-title">Companies</h3>
+        <p class="text-red-400 text-2xl text-center card-text">
+          1. Ferrari <br>2. Mercedes <br>3. Red Bull <br>4. McLaren<br>5. Aston Martin <br>6. Alpine <br>7. Williams<br>8. Haas <br>9. Racing Bulls <br>10. Audi <br>11. Cadillac
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ACHIEVEMENTS -->
-<section class="py-20 px-10 text-center">
-  <h2 class="text-3xl glow mb-10">Race Highlights</h2>
+<section class="py-20 px-10 text-center section-wrap">
+  <h2 class="text-3xl glow mb-10 section-heading">Race Highlights</h2>
 
   <div class="flex flex-wrap justify-center gap-8">
-    <div class="glass p-6 rounded-xl w-64 hover-glow">
-      <h3 class="text-xl">World Titles</h3>
-      <p class="text-red-400 text-3xl">12</p>
+    <div class="glass p-6 rounded-xl w-64 tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl card-title">World Titles</h3>
+        <p class="text-red-400 text-3xl card-value">12</p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl w-64 hover-glow">
-      <h3 class="text-xl">Race Wins</h3>
-      <p class="text-red-400 text-3xl">180+</p>
+    <div class="glass p-6 rounded-xl w-64 tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl card-title">Race Wins</h3>
+        <p class="text-red-400 text-3xl card-value">180+</p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl w-64 hover-glow">
-      <h3 class="text-xl">Podiums</h3>
-      <p class="text-red-400 text-3xl">350+</p>
+    <div class="glass p-6 rounded-xl w-64 tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl card-title">Podiums</h3>
+        <p class="text-red-400 text-3xl card-value">350+</p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl w-64 hover-glow">
-      <h3 class="text-xl">Manual Overtake Boost</h3>
-      <p class="text-red-400 text-3xl">~55%</p>
+    <div class="glass p-6 rounded-xl w-64 tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl card-title">Manual Overtake Boost</h3>
+        <p class="text-red-400 text-3xl card-value">~55%</p>
+      </div>
     </div>
 
-    <div class="glass p-6 rounded-xl w-64 hover-glow">
-      <h3 class="text-xl">Sprint Weekends</h3>
-      <p class="text-red-400 text-3xl">100 km </br>~30 minute</p>
+    <div class="glass p-6 rounded-xl w-64 tilt-card stats-card">
+      <div class="tilt-inner">
+        <h3 class="text-xl card-title">Sprint Weekends</h3>
+        <p class="text-red-400 text-3xl card-value">100 km <br>~30 minute</p>
+      </div>
     </div>
   </div>
 </section>
-
 
 <!-- GALLERY -->
-<section class="py-20 px-10">
-  <h2 class="text-3xl glow text-center mb-12">Gallery</h2>
+<section class="py-20 text-center px-10 section-wrap">
+  <h2 class="text-3xl glow text-center mb-12 section-heading">Gallery</h2>
 
   <div class="grid md:grid-cols-3 gap-6">
-    <img src="images/21456.jpg" class="rounded-lg hover-glow"/>
-    <img src="https://c.ndtvimg.com/2022-02/riikr7q8_car_625x300_03_February_22.jpg" class="rounded-lg hover-glow"/>
-    <img src="https://images.ctfassets.net/1fvlg6xqnm65/5T9vBHCtSpnE1l4WIMrj41/dbb1d7f2ffc7d31e745b4ccc351b0af7/Back_Racing_Desktop_Wallpaper_3.jpg?w=640&q=75&fm=webp" class="rounded-lg hover-glow"/>
-    <img src="images/redbull.jpg" class="rounded-lg hover-glow"/>
-    <img src="images/farraricenter.jpg" class="rounded-lg hover-glow"/>
-    <img src="images/redbull1.jpg" class="rounded-lg hover-glow"/>
+    <img src="images/21456.jpg" class="rounded-lg gallery-img" alt="F1 gallery image 1"/>
+    <img src="https://c.ndtvimg.com/2022-02/riikr7q8_car_625x300_03_February_22.jpg" class="rounded-lg gallery-img" alt="F1 gallery image 2"/>
+    <img src="https://images.ctfassets.net/1fvlg6xqnm65/5T9vBHCtSpnE1l4WIMrj41/dbb1d7f2ffc7d31e745b4ccc351b0af7/Back_Racing_Desktop_Wallpaper_3.jpg?w=640&q=75&fm=webp" class="rounded-lg gallery-img" alt="F1 gallery image 3"/>
+    <img src="images/redbull.jpg" class="rounded-lg gallery-img" alt="F1 gallery image 4"/>
+    <img src="images/farraricenter.jpg" class="rounded-lg gallery-img" alt="F1 gallery image 5"/>
+    <img src="images/redbull1.jpg" class="rounded-lg gallery-img" alt="F1 gallery image 6"/>
   </div>
 </section>
-
-<!-- CONTACT -->
-<!-- <section class="py-20 px-10 text-center">
-  <h2 class="text-3xl glow mb-6">Join the Future</h2>
-  <p class="text-gray-400 mb-6">Partner with us and redefine racing excellence.</p>
-
-  <button class="px-8 py-3 neon-border rounded-full hover-glow">
-    Contact Us
-  </button>
-</section> -->
 
 <!-- FOOTER -->
 <footer class="text-center py-6 text-gray-500 text-sm">
-  Made by - Hridesh Pratap Singh Thakur</br>
-  Gallery by - Harshvardhan Pathak</br>
+  Made by - Hridesh Pratap Singh Thakur<br>
+  Gallery by - Harshvardhan Pathak<br>
   Other pages by - Harsh Raj
 </footer>
+
+<script>
+  const tiltCards = document.querySelectorAll('.tilt-card');
+
+  tiltCards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)`;
+    });
+  });
+</script>
 
 </body>
 </html>
