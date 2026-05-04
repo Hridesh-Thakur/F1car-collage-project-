@@ -1,319 +1,605 @@
-<!--HERE IS FULL CONTACT SECTION-->
-                 
 <!DOCTYPE html>
 <html lang="en">
-<head>               
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact F1 Hub</title>
-    <style>    
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0d0d0f;
+            --bg-card: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.14);
+            --red: #ff4444;
+            --red-light: #ff6b6b;
+            --text: #f3f3f3;
+            --muted: #c9c9c9;
+            --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #cccccc;
-            background: #1a1a1a url('data:image/svg+xml,<svg xmlns="https://images.ctfassets.net/1fvlg6xqnm65/5XmzdVoSvsBFQNW9sPnMn4/3d72ca2ec18bd0ef4c0d691f96e69f77/Back_Racing_Desktop_Wallpaper_2.jpg?w=640&q=75&fm=webp" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23444" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
-            line-height: 1.7;
+            color: var(--muted);
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 68, 68, 0.16), transparent 22%),
+                radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.06), transparent 18%),
+                radial-gradient(circle at 50% 80%, rgba(255, 68, 68, 0.10), transparent 20%),
+                linear-gradient(135deg, #090909, #151515 45%, #101010);
+            min-height: 100vh;
             overflow-x: hidden;
+            perspective: 1400px;
+            position: relative;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(70px);
+            z-index: 0;
+            pointer-events: none;
+            animation: floatOrb 9s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 240px;
+            height: 240px;
+            background: rgba(255, 68, 68, 0.18);
+            top: 8%;
+            left: 6%;
+        }
+
+        .orb-2 {
+            width: 320px;
+            height: 320px;
+            background: rgba(255, 255, 255, 0.08);
+            bottom: 8%;
+            right: 4%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 68, 68, 0.10);
+            top: 52%;
+            left: 48%;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+            50% { transform: translateY(-20px) translateX(10px) scale(1.06); }
+        }
+
         header {
-            background: linear-gradient(90deg, #111, #333);
+            background: linear-gradient(90deg, rgba(17,17,17,0.9), rgba(51,51,51,0.7));
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
+
         header h1 {
             color: #eee;
             font-size: 2.5em;
             text-shadow: 0 0 20px #ff4444;
         }
+
         nav {
-            margin-top: 10px;
+            margin-top: 12px;
         }
+
         nav a {
             color: #ccc;
             text-decoration: none;
             padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 20px;
+            margin: 0 8px;
+            border-radius: 999px;
             border: 2px solid #555;
-            transition: all 0.3s;
+            transition: 0.35s ease;
             font-weight: bold;
+            display: inline-block;
+            transform-style: preserve-3d;
         }
+
         nav a:hover {
             background: #ff4444;
             color: #fff;
             border-color: #ff4444;
-            transform: scale(1.05);
+            transform: translateY(-4px) rotateX(8deg);
+            box-shadow: 0 12px 24px rgba(255, 68, 68, 0.25);
         }
+
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.ctfassets.net/1fvlg6xqnm65/5XmzdVoSvsBFQNW9sPnMn4/3d72ca2ec18bd0ef4c0d691f96e69f77/Back_Racing_Desktop_Wallpaper_2.jpg?w=640&q=75&fm=webp') center/cover no-repeat fixed;
-            height: 60vh;
+            min-height: 72vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #fff;
             position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(rgba(0,0,0,0.70), rgba(0,0,0,0.72)),
+                url('https://images.ctfassets.net/1fvlg6xqnm65/5XmzdVoSvsBFQNW9sPnMn4/3d72ca2ec18bd0ef4c0d691f96e69f77/Back_Racing_Desktop_Wallpaper_2.jpg?w=640&q=75&fm=webp') center/cover no-repeat fixed;
         }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(255,68,68,0.16), transparent 55%);
+            animation: pulseGlow 5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%,100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
         .hero-content {
+            position: relative;
             z-index: 2;
-            max-width: 800px;
-            padding: 0 20px;
+            max-width: 950px;
+            padding: 30px;
+            transform-style: preserve-3d;
+            animation: heroFloat 4s ease-in-out infinite;
         }
+
+        @keyframes heroFloat {
+            0%,100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-8px) rotateX(2deg); }
+        }
+
         .hero h2 {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 3.5em;
+            margin-bottom: 18px;
+            color: var(--text);
+            text-shadow: 0 0 24px rgba(255, 68, 68, 0.5);
         }
-        main {
-            max-width: 1000px;
+
+        .hero p {
+            font-size: 1.2em;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 60px 20px;
+            color: #ededed;
         }
+
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 70px 20px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .left-stack,
+        .right-stack {
+            display: grid;
+            gap: 30px;
+        }
+
         .contact-section {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #444;
-            backdrop-filter: blur(15px);
-            margin-bottom: 40px;
-            text-align: center;
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+            padding: 34px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow);
+            transform-style: preserve-3d;
+            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.06), transparent);
+            transform: translateX(-100%);
+            transition: 0.8s ease;
+        }
+
+        .contact-section:hover::before {
+            transform: translateX(100%);
+        }
+
+        .contact-section:hover {
+            transform: rotateX(4deg) rotateY(-4deg) translateY(-8px);
+            border-color: rgba(255, 68, 68, 0.4);
+            box-shadow: 0 28px 50px rgba(0,0,0,0.45), 0 0 30px rgba(255,68,68,0.12);
+        }
+
         .contact-section h3 {
-            color: #ddd;
-            font-size: 2.2em;
-            margin-bottom: 20px;
+            color: #f4f4f4;
+            font-size: 2.1em;
+            margin-bottom: 18px;
         }
-        .contact-section h3::before {
-            content: '📞';
-            font-size: 1.5em;
-            margin-right: 10px;
+
+        .contact-section p {
+            margin-bottom: 14px;
+            color: #d5d5d5;
         }
+
         .social-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 28px;
         }
+
         .social-btn {
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #555, #666);
-            color: #ccc;
-            padding: 15px 30px;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(85,85,85,0.9), rgba(110,110,110,0.65));
+            color: #f1f1f1;
+            padding: 18px 22px;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 18px;
             font-weight: bold;
-            transition: all 0.4s ease;
-            border: 2px solid #555;
-            min-width: 200px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.10);
+            min-height: 82px;
+            text-align: center;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+            transform-style: preserve-3d;
         }
+
         .social-btn:hover {
-            background: linear-gradient(135deg, #ff4444, #ff6666);
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
             color: #fff;
+            border-color: rgba(255,68,68,0.8);
+            transform: translateY(-8px) rotateX(8deg) scale(1.02);
+            box-shadow: 0 18px 34px rgba(255,68,68,0.35);
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ececec;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 16px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 14px;
+            color: #f1f1f1;
+            font-size: 1em;
+            transition: 0.35s ease;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
             border-color: #ff4444;
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255,68,68,0.4);
+            box-shadow: 0 0 0 4px rgba(255,68,68,0.12), 0 12px 25px rgba(255,68,68,0.12);
+            background: rgba(255,255,255,0.11);
+            transform: translateY(-2px);
         }
-        .social-btn i {
-            font-size: 1.5em;
-            margin-right: 15px;
+
+        textarea {
+            height: 150px;
+            resize: vertical;
         }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
+            color: #fff;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 18px;
+            font-size: 1.08em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.35s ease;
+            box-shadow: 0 18px 28px rgba(255,68,68,0.22);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 24px 35px rgba(255,68,68,0.35);
+        }
+
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: 1fr;
+            gap: 18px;
         }
+
         .info-card {
-            background: rgba(0,0,0,0.4);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid #ff4444;
-            transition: transform 0.3s;
+            background: linear-gradient(135deg, rgba(0,0,0,0.45), rgba(255,255,255,0.04));
+            padding: 24px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.35s ease;
+            transform-style: preserve-3d;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+
         .info-card:hover {
-            transform: translateX(10px);
+            transform: translateY(-8px) rotateY(8deg);
+            box-shadow: 0 18px 30px rgba(0,0,0,0.35);
+            border-color: rgba(255,68,68,0.35);
         }
+
         .info-icon {
-            font-size: 2.5em;
+            font-size: 2.4em;
             color: #ff4444;
             display: block;
             margin-bottom: 10px;
         }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.03);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #555;
-        }
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ddd;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.08);
-            border: 2px solid #444;
-            border-radius: 10px;
-            color: #ccc;
-            font-size: 1em;
-            transition: all 0.3s;
-        }
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #ff4444;
-            box-shadow: 0 0 20px rgba(255,68,68,0.2);
-            background: rgba(255,255,255,0.12);
-        }
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        .submit-btn {
-            background: linear-gradient(135deg, #ff4444, #ff6666);
-            color: #fff;
-            border: none;
-            padding: 18px 50px;
-            border-radius: 50px;
+
+        .info-card h4 {
             font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
+            color: #fff;
+            margin-bottom: 6px;
         }
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255,68,68,0.4);
+
+        .mini-panel {
+            display: grid;
+            gap: 16px;
         }
+
+        .mini-box {
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            transition: 0.35s ease;
+        }
+
+        .mini-box:hover {
+            transform: translateY(-6px) rotateX(5deg);
+            border-color: rgba(255,68,68,0.35);
+        }
+
+        .mini-box h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
         footer {
             text-align: center;
-            padding: 30px;
-            background: #111;
+            padding: 28px;
+            background: rgba(17,17,17,0.85);
             color: #888;
-            margin-top: 60px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            z-index: 2;
         }
+
+        @media (max-width: 1024px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .right-stack {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h2 { font-size: 2em; }
-            header h1 { font-size: 2em; }
-            .social-links { flex-direction: column; align-items: center; }
-            .contact-info { grid-template-columns: 1fr; }
+            header h1 {
+                font-size: 2em;
+            }
+
+            .hero {
+                min-height: 62vh;
+            }
+
+            .hero h2 {
+                font-size: 2.2em;
+            }
+
+            nav a {
+                margin: 6px 4px;
+                padding: 9px 16px;
+                font-size: 0.95em;
+            }
+
+            .social-links,
+            .form-grid,
+            .right-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
     <header>
         <h1>📞 Contact F1 Hub</h1>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="contact.html" style="background:#ff4444; color:#fff; border-color:#ff4444;">Contact</a>
-
+            <a href="index.html" class="hover:text-red-400">Home</a>
+            <a href="about.html" class="hover:text-red-400">About</a>
+            <a href="Specs.html" class="hover:text-red-400">Specs</a>
+            <a href="gallery.html" class="hover:text-red-400">Gallery</a>
+            <a href="tracks.html" class="hover:text-red-400">Tracks</a>
+            <!-- <a href="Contact.html" class="hover:text-red-400">Contact</a> -->
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h2>Get In Touch</h2>
-            <p>Connect with the F1 community. DM us on Instagram!</p>
-            <a href="https://www.instagram.com/f1hub/" target="_blank" class="social-btn">
-                📱 <span>Instagram</span>
-            </a>
+            <h2>Get In Touch With The Paddock</h2>
+            <p>Connect with the F1 community, share your ideas, ask your motorsport questions, and drop your message with a premium 3D-styled contact experience.</p>
         </div>
     </section>
 
     <main>
-        <section id="social" class="contact-section">
-            <h3>Follow & Connect</h3>
-            <p>Best way to reach us is Instagram DMs. Share your F1 passion!</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/" target="_blank" class="social-btn" id="contact-us-btn">
-                    💬 Contact Us on Instagram
-                </a>
-                <a href="https://twitter.com/" target="_blank" class="social-btn">
-                    🐦 Twitter/X
-                </a>
-                <a href="https://youtube.com/" target="_blank" class="social-btn">
-                    ▶️ YouTube
-                </a>
+        <div class="page-layout">
+            <div class="left-stack">
+                <section id="social" class="contact-section">
+                    <h3>📡 Follow & Connect</h3>
+                    <p>Best way to reach us is Instagram DMs. Share your F1 passion and stay connected with the racing world.</p>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/" target="_blank" class="social-btn" id="contact-us-btn">💬 Instagram DM</a>
+                        <a href="https://twitter.com/" target="_blank" class="social-btn">🐦 Twitter / X</a>
+                        <a href="https://youtube.com/" target="_blank" class="social-btn">▶️ YouTube</a>
+                        <a href="mailto:hrithakur01@gmail.com" class="social-btn">📧 Email Us</a>
+                    </div>
+                </section>
+
+                <section id="form" class="contact-section">
+                    <h3>📝 Send Message</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group"
+                                abel for="name">Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+
+                            <div class="form-group"
+                                abel for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+
+                            <div class="form-group full"
+                                abel for="message">Message</label>
+                                <textarea id="message" required placeholder="Tell us about your F1 queries..."></textarea>
+                            </div>
+
+                            <div class="form-group full">
+                                <button type="submit" class="submit-btn">🚀 Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
             </div>
-        </section>
 
-        <section id="form" class="contact-section">
-            <h3>Send Message</h3>
-            <form onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" required placeholder="Tell us about your F1 queries..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">🚀 Send Message</button>
-            </form>
-        </section>
+            <div class="right-stack">
+                <section id="info" class="contact-section">
+                    <h3>⚡ Quick Info</h3>
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <span class="info-icon">📧</span>
+                            <h4>hrithakur01@gmail.com</h4>
+                            <p>Replies within 24h</p>
+                        </div>
 
-        <section id="info" class="contact-section">
-            <h3>Quick Info</h3>
-            <div class="contact-info">
-                <div class="info-card">
-                    <span class="info-icon">📧</span>
-                    <h4>MF01@gmail.com</h4>
-                    <p>Replies within 24h</p>
-                </div>
-                <div class="info-card">
-                    <span class="info-icon">📱</span>
-                    <h4>9876543210</h4>
-                    <p>WhatsApp ready</p>
-                </div>
+                        <div class="info-card">
+                            <span class="info-icon">📱</span>
+                            <h4>+91 9752942999</h4>
+                            <p>WhatsApp ready</p>
+                        </div>
+                    </div>
+                </section>
 
+                <div class="mini-panel">
+                    <div class="mini-box">
+                        <h4>🏎️ Fan Support</h4>
+                        <p>Ask about cars, tracks, drivers, or design ideas for your F1 project page.</p>
+                    </div>
+
+                    <div class="mini-box">
+                        <h4>⏱️ Fast Response</h4>
+                        <p>Reach out anytime and keep your F1 hub active, polished, and engaging.</p>
+                    </div>
+
+                    <div class="mini-box">
+                        <h4>🔥 Community First</h4>
+                        <p>From racing fans to beginners, everyone can connect and share interest here.</p>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 
-
-    <!-- <script>
-        document.getElementById('contact-us-btn').addEventListener('click', function(e) {
-            if (confirm('Opening Instagram DMs...')) {
-                window.open('https://www.instagram.com/', '_blank');
-            }
-        });
-
+    <script>
         function handleSubmit(event) {
             event.preventDefault();
-            alert('Message sent! We\'ll reply on Instagram DMs 🚀');
-            setTimeout(() => {
-                window.open('https://www.instagram.com/', '_blank');
-            }, 1500);
+            alert("Message sent! We'll reply soon 🚀");
         }
 
-        // Smooth scroll for nav links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
+        const panels = document.querySelectorAll('.contact-section, .info-card, .mini-box');
+
+        panels.forEach((panel) => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = -((y - centerY) / 22);
+                const rotateY = ((x - centerX) / 22);
+
+                panel.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                panel.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
             });
         });
-    </script> --> 
+    </script>
 </body>
 </html>
