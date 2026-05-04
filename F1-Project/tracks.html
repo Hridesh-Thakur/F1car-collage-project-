@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Race Tracks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(225, 6, 0, 0.10), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 20%),
+        linear-gradient(135deg, #05060a, #0f1118);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: rgba(5, 6, 10, 0.82);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #e10600;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e10600;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 8%;
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
+        url("https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1a25c5ba041f0aa576605d99d2fd28f3d0554a06.jpg") center/cover no-repeat;    
+      }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 45px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+      transform: perspective(1000px) rotateX(4deg);
+    }
+
+    .tag {
+      color: #e10600;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.4rem;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 1.15rem;
+      color: #d9d9d9;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #ff2a1a, #b90000);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(225, 6, 0, 0.35);
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .section {
+      padding: 85px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #bbbbbb;
+      max-width: 760px;
+      margin: 0 auto 50px;
+      font-size: 1.05rem;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .overview-card {
+      padding: 28px 22px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #181b24, #101219);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.28);
+      transition: 0.35s ease;
+      transform-style: preserve-3d;
+    }
+
+    .overview-card:hover {
+      transform: perspective(900px) rotateX(8deg) rotateY(-8deg) translateY(-8px);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.38);
+    }
+
+    .overview-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #e10600;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .overview-card p {
+      color: #d5d5d5;
+      font-size: 0.98rem;
+    }
+
+    .tracks-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 30px;
+    }
+
+    .track-card {
+      background: linear-gradient(180deg, #181a22, #101117);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .track-card:hover {
+      transform: perspective(1000px) rotateX(6deg) rotateY(-6deg) translateY(-10px);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.45);
+    }
+
+    .track-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .track-info {
+      padding: 22px;
+    }
+
+    .track-info h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #e10600;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .track-info p {
+      color: #d7d7d7;
+      margin-bottom: 8px;
+    }
+
+    .featured-track {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      background: linear-gradient(135deg, #171922, #0e1016);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    }
+
+    .featured-track img {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      object-fit: cover;
+    }
+
+    .featured-content {
+      padding: 32px;
+    }
+
+    .featured-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: #e10600;
+    }
+
+    .featured-content p {
+      color: #d8d8d8;
+      margin-bottom: 14px;
+      font-size: 1.02rem;
+    }
+
+    .featured-points {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .point {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .point:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .point h4 {
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .point p {
+      font-size: 0.95rem;
+      color: #c8c8c8;
+      margin: 0;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #171922, #0d0e14);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: perspective(900px) rotateX(8deg) translateY(-8px);
+    }
+
+    .stat-box h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #e10600;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-box p {
+      color: #d0d0d0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 22px;
+    }
+
+    .timeline-item {
+      padding: 24px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #161922, #0d1016);
+      border-left: 4px solid #e10600;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+      transition: 0.35s ease;
+    }
+
+    .timeline-item:hover {
+      transform: perspective(1000px) rotateY(4deg) translateX(8px);
+    }
+
+    .timeline-item h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .timeline-item p {
+      color: #d5d5d5;
+    }
+
+    .extra-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .extra-card {
+      padding: 26px 22px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #191b25, #0e1017);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25);
+      transition: 0.35s ease;
+    }
+
+    .extra-card:hover {
+      transform: perspective(900px) rotateX(6deg) rotateY(6deg) translateY(-10px);
+    }
+
+    .extra-card h3 {
+      color: #e10600;
+      margin-bottom: 10px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .extra-card p {
+      color: #d6d6d6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 22px;
+      background: #06070a;
+      color: #9ea3aa;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 950px) {
+      .featured-track {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-track img {
+        min-height: 260px;
+      }
+
+      .featured-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 18px 5%;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .hero {
+        min-height: 88vh;
+        padding: 20px 5%;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-content {
+        padding: 28px;
+      }
+
+      .section {
+        padding: 65px 5%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .hero-text,
+      .section-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .track-card img {
+        height: 200px;
+      }
+
+      .track-card:hover,
+      .overview-card:hover,
+      .extra-card:hover,
+      .timeline-item:hover,
+      .stat-box:hover {
+        transform: translateY(-6px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">F1<span>TRACKS</span></div>
+    <ul class="nav-links">
+            <a href="index.html" class="hover:text-red-400">Home</a>
+            <a href="about.html" class="hover:text-red-400">About</a>
+            <a href="Specs.html" class="hover:text-red-400">Specs</a>
+            <a href="gallery.html" class="hover:text-red-400">Gallery</a>
+            <!-- <a href="tracks.html" class="hover:text-red-400">Tracks</a> -->
+            <a href="Contact.html" class="hover:text-red-400">Contact</a>
+    </ul>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="tag">Formula 1 Circuits</p>
+      <h1>Explore The Most Iconic Race Tracks In F1</h1>
+      <p class="hero-text">
+        From Monaco’s tight streets to Monza’s high-speed straights, Formula 1 tracks define the strategy,
+        excitement, and challenge of every Grand Prix weekend.
+      </p>
+      <a href="#tracks" class="btn">View Circuits</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Circuit Overview</h2>
+    <p class="section-subtitle">
+      Formula 1 race tracks are designed to test speed, braking, tire management, cornering precision,
+      and driver confidence under pressure.
+    </p>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3>Street Circuits</h3>
+        <p>Tracks like Monaco are narrow, technical, and demand extreme precision from drivers.</p>
+      </div>
+      <div class="overview-card">
+        <h3>High-Speed Tracks</h3>
+        <p>Monza is known for long straights where cars reach incredible top speeds.</p>
+      </div>
+      <div class="overview-card">
+        <h3>Technical Layouts</h3>
+        <p>Suzuka and Silverstone challenge drivers with linked corners and rhythm sections.</p>
+      </div>
+      <div class="overview-card">
+        <h3>Weather Impact</h3>
+        <p>Spa-Francorchamps is famous for changing weather that can alter the race completely.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tracks">
+    <h2 class="section-title">Famous F1 Circuits</h2>
+    <p class="section-subtitle">
+      These circuits are among the most recognized venues in Formula 1 and each offers a unique racing identity. 
+    </p>
+    
+
+      <div class="tracks-container">
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/5b5c1e50971fd88d18acd86ec19efd26f181ee95.jpg" alt="Silverstone Circuit">
+        <div class="track-info">
+          <h3>Silverstone Circuit</h3>
+          <p><strong>Location:</strong> United Kingdom</p>
+          <p><strong>Style:</strong> Fast and flowing</p>
+          <p><strong>Highlight:</strong> Maggots-Becketts complex</p>
+          <p>Silverstone is one of the most respected Formula 1 venues because of its speed and historic value.</p>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4be0d9ebedd2f46c6534cd62461c5dcf833eb904.jpg" alt="Monaco Circuit">
+        <div class="track-info">
+          <h3>Circuit de Monaco</h3>
+          <p><strong>Location:</strong> Monaco</p>
+          <p><strong>Style:</strong> Street circuit</p>
+          <p><strong>Highlight:</strong> Tunnel and harbor section</p>
+          <p>Monaco is one of the shortest and most prestigious tracks on the Formula 1 calendar.</p>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b78aecb9c656dbc680e7c959ff1c68bfcb296d61.jpg" alt="Spa Francorchamps">
+        <div class="track-info">
+          <h3>Spa-Francorchamps</h3>
+          <p><strong>Location:</strong> Belgium</p>
+          <p><strong>Style:</strong> Elevation-heavy circuit</p>
+          <p><strong>Highlight:</strong> Eau Rouge and Raidillon</p>
+          <p>Spa is widely admired for dramatic elevation change and unpredictable conditions.</p>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/0bfd540dbc1d81b5f54bc1d1b57f5e33a1a5809a.jpg" alt="Monza Circuit">
+        <div class="track-info">
+          <h3>Autodromo Monza</h3>
+          <p><strong>Location:</strong> Italy</p>
+          <p><strong>Style:</strong> Ultra high-speed track</p>
+          <p><strong>Highlight:</strong> Temple of Speed</p>
+          <p>Monza is about 5.793 km long and is one of the most frequently used Formula 1 circuits.</p>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a0b252b03c2ecac856b32c99cf6fc2a2b4d998a5.jpg" alt="Suzuka Circuit">
+        <div class="track-info">
+          <h3>Suzuka Circuit</h3>
+          <p><strong>Location:</strong> Japan</p>
+          <p><strong>Style:</strong> Technical and balanced</p>
+          <p><strong>Highlight:</strong> Figure-eight inspired layout</p>
+          <p>Suzuka is loved for its smooth flow and technical corner sequences.</p>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c9b3855c5173939ba5137d14d2a9304e7401ade5.jpg" alt="Yas Marina Circuit">
+        <div class="track-info">
+          <h3>Yas Marina Circuit</h3>
+          <p><strong>Location:</strong> Abu Dhabi</p>
+          <p><strong>Style:</strong> Modern night circuit</p>
+          <p><strong>Highlight:</strong> Floodlit Grand Prix setting</p>
+          <p>Yas Marina stands out for its modern architecture and late-season night-race atmosphere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Featured Circuit</h2>
+
+    <div class="featured-track">
+      <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/51de5b7423c15e7ec468e14382d3f802e175b228.jpg" alt="Monza Temple of Speed">
+      <div class="featured-content">
+        <h3>Monza: Temple of Speed</h3>
+        <p>Monza is one of the fastest and most historic circuits in Formula 1, and it has hosted a very high number of Grands Prix since the championship’s early years. </p>
+        <p>Its long straights, heavy braking zones, and passionate crowd make it one of the most special race weekends for teams and fans. </p>
+
+        <div class="featured-points">
+          <div class="point">
+            <h4>Track Length</h4>
+            <p>Approximately 5.793 km.</p>
+          </div>
+          <div class="point">
+            <h4>Character</h4>
+            <p>Low-downforce, high top-speed challenge.</p>
+          </div>
+          <div class="point">
+            <h4>Identity</h4>
+            <p>One of the oldest and most iconic racing venues.</p>
+          </div>
+          <div class="point">
+            <h4>Fan Appeal</h4>
+            <p>Known for strong Ferrari support and a powerful race-day atmosphere. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Track Statistics</h2>
+    <p class="section-subtitle">
+      These numbers help explain why circuits play such a major role in Formula 1 strategy and spectacle. 
+    </p>
+
+    <div class="stats-container">
+      <div class="stat-box">
+        <h3>74</h3>
+        <p>Monza has hosted one of the highest numbers of Formula 1 races. </p>
+      </div>
+      <div class="stat-box">
+        <h3>71</h3>
+        <p>Monaco has hosted a very large number of Grands Prix despite being a short street circuit. </p>
+      </div>
+      <div class="stat-box">
+        <h3>3.337 km</h3>
+        <p>Monaco is one of the shortest circuits on the Formula 1 calendar. </p>
+      </div>
+      <div class="stat-box">
+        <h3>5.793 km</h3>
+        <p>Monza is known for its long layout and top-speed sections. </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Race Weekend Timeline</h2>
+    <p class="section-subtitle">
+      A Formula 1 event is more than just the main race, and each session adds to the circuit story. 
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Practice Sessions</h3>
+        <p>Teams collect data, adjust car balance, and study track behavior before qualifying.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Qualifying</h3>
+        <p>Drivers push to the limit for the fastest lap, and grid position often matters heavily at tighter circuits like Monaco. </p>
+      </div>
+      <div class="timeline-item">
+        <h3>Race Start</h3>
+        <p>The opening lap can define the entire Grand Prix, especially on tracks with limited overtaking space.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Pit Strategy</h3>
+        <p>Tire wear, weather changes, and safety cars can completely change the race result during the middle phase.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Final Laps</h3>
+        <p>The closing laps often create the biggest tension as drivers attack, defend, and manage tire performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Why Tracks Matter</h2>
+    <div class="extra-grid">
+      <div class="extra-card">
+        <h3>Driver Skill</h3>
+        <p>Every circuit rewards a different style, whether it is bravery under braking, corner precision, or rhythm through high-speed sections.</p>
+      </div>
+      <div class="extra-card">
+        <h3>Car Setup</h3>
+        <p>Teams change wing levels, tire choices, and suspension balance depending on the layout of each circuit.</p>
+      </div>
+      <div class="extra-card">
+        <h3>Fan Experience</h3>
+        <p>Historic venues, night races, and famous corners make the circuit itself part of Formula 1 culture. </p>
+      </div>
+      <div class="extra-card">
+        <h3>Race Drama</h3>
+        <p>Track width, overtaking zones, and weather conditions all influence how exciting the race becomes.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
