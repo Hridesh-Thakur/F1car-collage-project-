@@ -1,4 +1,4 @@
-# F1 Car Project                            
+# F1 Car Project                               
 
 A visually rich **Formula 1 themed website project** built using HTML and CSS. This project presents an immersive F1 experience with multiple pages such as home, about, specs, contact, and race-track related content, designed with a modern motorsport-inspired interface.
 
