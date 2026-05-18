@@ -1,6 +1,6 @@
-# F1 Car Project                                                                                  
+# F1 Car Project                                                                                          
 
-A visually rich **Formula 1 themed website project** built using HTML and CSS. This project presents an immersive F1 experience with multiple pages such as home, about, specs, contact, and race-track related content, designed with a modern motorsport-inspired interface.
+A visually rich **Formula 1 themed website project** built using HTML and CSS. This project presents an immersive F1 experience with multiple pages, such as home, about, specs, contact, and race-track-related content, designed with a modern motorsport-inspired interface.
 
 ## Overview
 
@@ -36,7 +36,7 @@ This project is a static front-end website created for a college project. It foc
 The website is designed to create a premium and sporty feel inspired by Formula 1 branding. Key design choices include:
 
 - Dark background theme
-- Red highlight color for emphasis
+- Red highlight colour for emphasis
 - Card-based layouts
 - Premium glass/3D-style sections
 - Full-screen hero sections
@@ -76,7 +76,7 @@ This project was created as a college website project to showcase front-end deve
 ## Future Improvements
 
 - Add more race tracks and detailed circuit information
-- Add animations and transitions for better experience
+- Add animations and transitions for a better experience
 - Improve responsiveness on all devices
 - Add JavaScript-based interactivity
 - Include driver and team information pages
