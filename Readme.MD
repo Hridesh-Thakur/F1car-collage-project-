@@ -87,7 +87,7 @@ This project was created as a college website project to showcase front-end deve
 
 
 <div align="center">
-```
+
 ~ Made with ❤ By Hridesh Thakur
-  Follow for more
-```
+  
+
