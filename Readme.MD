@@ -91,3 +91,6 @@ This project was created as a college website project to showcase front-end deve
 ~ Made with ❤ By Hridesh Thakur
   Follow for more
 ```
+
+> [!NOTE]
+> This creates a highlighted box with an icon
