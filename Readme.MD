@@ -84,3 +84,4 @@ This project was created as a college website project to showcase front-end deve
 - Add gallery or slideshow section
 
 ~ Made with ❤ By Hridesh Thakur
+Dollow for more
