@@ -51,9 +51,9 @@ F1car-collage-project-/
 │── about.html
 │── Specs.html
 │── tracks.html
+│── gallery.html
 │── contact.html
 │── style.css
-│── assets/
 │── images/
 └── README.md
 ```
